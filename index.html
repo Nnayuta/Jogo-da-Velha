@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="title">
+        <h1>Jogo da velha</h1>
+    </div>
+
+    <div class="jogador">
+        <label>Player: </label>
+        <label id="selected-player"></label>
+    </div>
+
+    <div class="vencedor" id="vencedor">
+        <label>Winner: </label>
+        <label id="win-player"></label>
+    </div>
+
+    <div id="game">
+    </div>
+    
+    <div>
+        <button id="btn-reset" onclick="setup()">Reset</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
