@@ -33,34 +33,44 @@ body {
 
 .quadrado:hover {
     background-color: #2c0263a4;
-
 }
 
-.jogador,
-.vencedor {
+.jogador {
     font-size: 20px;
     margin-top: 10px;
+    text-align: center;
 }
 
 #btn-reset {
     position: fixed;
     margin-left: 165px;
     margin-top: -15px;
-
     width: 40px;
     height: 40px;
     background: rgba(255, 255, 255, 0.521);
-    color: #c8a2c8;
     border: none;
     cursor: pointer;
     border-radius: 8px;
-    text-transform: uppercase;
 }
 
-#btn-reset img {
-    width: 20px;
-    height: 20px;
-    opacity: 0.8;
+#btn-reset p {
+    font-size: 35px;
+    color: rgb(81, 3, 117)
+}
+
+#btn-reset p:hover {
+    color: rgb(130, 8, 187);
+    animation: rotation 4s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
 }
 
 #game {
@@ -79,30 +89,27 @@ body {
     font-size: 30px;
 }
 
-#title #titleRegras{
+#title #titleRegras {
     margin-top: 9px;
 }
 
-#title #regras, #titleRegras {
+#title #regras,
+#titleRegras {
     font-size: 14px;
     width: 340px;
     text-transform: initial;
 }
 
-#title #titleRegras{
+#title #titleRegras {
     font-weight: bold;
     margin-bottom: 3px;
 }
 
-#title #regras{
+#title #regras {
     font-style: italic;
 }
 
-
-
-
-
- /* nome regras em bold e o resto do texto em italic  */
+/* nome regras em bold e o resto do texto em italic  */
 footer {
     text-transform: initial;
     position: fixed;

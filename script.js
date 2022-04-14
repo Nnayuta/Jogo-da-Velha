@@ -4,21 +4,23 @@ let state = []
 let players = []
 let win = false
 
-let winPlayer = document.getElementById('win-player')
-let winnerDiv = document.getElementById('vencedor')
+const winPlayer = document.getElementById('win-player')
+const selectedPlayer = document.getElementById('selected-player')
 
 setup()
 
 function setPlayer(player) {
-    document.getElementById('selected-player').innerHTML = `${player.piece}`
+    selectedPlayer.innerHTML = `Jogador: ${player.piece}`
 }
 
 function setWinner(player) {
+    winPlayer.style.display = 'block'
+    selectedPlayer.style.display = 'none'
     winPlayer.innerHTML = player ? `Vencedor: ${player.piece}` : 'Empate'
-    winnerDiv.style.display = 'block'
 }
 
 function setup() {
+    win = false
     players = [
         {
             piece: 'X'
@@ -29,8 +31,8 @@ function setup() {
     ]
 
     setPlayer(players[0])
-    winPlayer.innerHTML = '-'
-    winnerDiv.style.display = 'none'
+    winPlayer.style.display = 'none'
+    selectedPlayer.style.display = 'block'
     game.innerHTML = ''
 
     state = [
@@ -58,8 +60,6 @@ function setup() {
         }
         game.appendChild(tr)
     }
-
-    win = false
 }
 
 function play(row, col, obj) {
