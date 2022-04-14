@@ -1,34 +1,33 @@
 const game = document.getElementById('game')
 
 let state = []
-
+let players = []
 let win = false
+
 let winPlayer = document.getElementById('win-player')
 let winnerDiv = document.getElementById('vencedor')
-
-const players = [
-    {
-        nome: 'Player 1',
-        part: 'X'
-    },
-    {
-        nome: 'Player 2',
-        part: 'O'
-    }
-]
 
 setup()
 
 function setPlayer(player) {
-    document.getElementById('selected-player').innerHTML = `${player.part}`
+    document.getElementById('selected-player').innerHTML = `${player.piece}`
 }
 
 function setWinner(player) {
-    winPlayer.innerHTML = player ? `${player.nome}` : 'Empate'
+    winPlayer.innerHTML = player ? `Vencedor: ${player.piece}` : 'Empate'
     winnerDiv.style.display = 'block'
 }
 
 function setup() {
+    players = [
+        {
+            piece: 'X'
+        },
+        {
+            piece: 'O'
+        }
+    ]
+
     setPlayer(players[0])
     winPlayer.innerHTML = '-'
     winnerDiv.style.display = 'none'
@@ -66,8 +65,8 @@ function setup() {
 function play(row, col, obj) {
     if (win == true) return
 
-    state[row][col] = players[0].part
-    obj.innerHTML = players[0].part
+    state[row][col] = players[0].piece
+    obj.innerHTML = players[0].piece
     obj.style.color = 'white'
     obj.style.backgroundColor = 'black'
     vitoria()
@@ -84,37 +83,37 @@ function VerificaVitoria(linha1, linha2, linha3) {
     }
 }
 
-function getElementAndColor(row, col) {
-    const element = document.querySelector(`[row="${row}"][col="${col}"]`)
-    element.style.backgroundColor = 'green'
-} 
+function getElementAndColor(row1, col1, row2, col2, row3, col3) {
+    const winColor = 'green'
+
+    const element = document.querySelector(`[row="${row1}"][col="${col1}"]`)
+    element.style.backgroundColor = winColor
+
+    const element2 = document.querySelector(`[row="${row2}"][col="${col2}"]`)
+    element2.style.backgroundColor = winColor
+
+    const element3 = document.querySelector(`[row="${row3}"][col="${col3}"]`)
+    element3.style.backgroundColor = winColor
+}
 
 function vitoria() {
     //Diagonal Esquerda
     if (VerificaVitoria(state[0][0], state[1][1], state[2][2])) {
         setWinner(players[0])
-        getElementAndColor(0, 0)
-        getElementAndColor(1, 1)
-        getElementAndColor(2, 2)
+        getElementAndColor(0, 0, 1, 1, 2, 2)
     }
 
     //Diagonal Direita
     if (VerificaVitoria(state[0][2], state[1][1], state[2][0])) {
         setWinner(players[0])
-        getElementAndColor(0, 2)
-        getElementAndColor(1, 1)
-        getElementAndColor(2, 0)
+        getElementAndColor(0, 2, 1, 1, 2, 0)
     }
 
     //linha
     for (let i = 0; i < 3; i++) {
         if (VerificaVitoria(state[0][i], state[1][i], state[2][i])) {
             setWinner(players[0])
-
-            getElementAndColor(0, i)
-            getElementAndColor(1, i)
-            getElementAndColor(2, i)
-
+            getElementAndColor(0, i, 1, i, 2, i)
         }
     }
 
@@ -122,17 +121,14 @@ function vitoria() {
     for (let i = 0; i < 3; i++) {
         if (VerificaVitoria(state[i][0], state[i][1], state[i][2])) {
             setWinner(players[0])
-
-            getElementAndColor(i, 0)
-            getElementAndColor(i, 1)
-            getElementAndColor(i, 2)
+            getElementAndColor(i, 0, i, 1, i, 2)
         }
     }
 
-    Empate()
+    Draw()
 }
 
-function Empate() {
+function Draw() {
     let cont = 0
     state.forEach(linha => {
         linha.forEach(coluna => {
